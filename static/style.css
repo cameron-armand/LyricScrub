@@ -1,0 +1,33 @@
+html, body
+{
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 600px; /* or 950px */
+}
+
+img{
+	height: 20px;
+	width: auto;
+}
+
+.lyrics {
+	white-space: pre-wrap;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	color: black
+}
+.return {
+  position: fixed; 
+  top: 30px; 
+  left: 30px;
+  z-index: 99; 
+}
+
+.content { 
+  margin-top: 100px;
+  margin-bottom: 100px; 
+}

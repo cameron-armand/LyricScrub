@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>LyricScrub</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- This website uses Open Sans! -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Custom styles for this site-->
+    {% if isdark %}
+    <link id="pagestyle" href="../static/dark.css" rel="stylesheet">
+    {% else %}
+    <link id="pagestyle" href="../static/style.css" rel="stylesheet">
+    {% endif %}
+
+  </head>
+
+  <body>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Info</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Built by Cameron Armand <br>
+          Contact: <a href="mailto:camerondarmand@yahoo.com">Email</a><br><br>
+          LyricScrub attempts to find the input album on Spotify. The formatting must match how it appears
+          on Spotify; so if you're having trouble, search for the album there and try to copy verbatim. <br><br>
+          <em>Please be patient</em> retrieving the lyrics can take some time.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid d-flex h-100">
+    <div class="col text-center justify-content-center align-self-center">
+    <!-- Default form login -->
+    <form id = "mainform" class="text-center border border-secondary p-5" action="/" method="POST">
+
+        <p class="h2 mb-4">LyricScrub</p>
+
+        <!-- Artist -->
+        <div class="container-fluid mb-4">
+        <input type="text" name="artist" class="form-control {% if badartist %}is-invalid{% endif %}" placeholder="Artist">
+        {% if badartist %}
+        <div class="invalid-feedback error">
+          Please input valid artist name.
+        </div>
+        {% endif %}
+        </div>
+
+        <div class="container-fluid mb-4">
+        <!-- Album -->
+        <input type="text" name="album" class="form-control {% if badalbum %}is-invalid{% endif %}" placeholder="Album">
+        {% if badalbum %}
+        <div class="invalid-feedback error">
+          Please input valid album name.
+        </div>
+        {% endif %}
+        </div>
+
+        <!-- Submit -->
+        <button id="submit" class="btn btn-primary mb-4" type="submit">
+          <span id="sp1" class="spinner-border spinner-border-sm d-none"></span>
+          Search
+        </button>
+        <button type="button" class="btn btn-secondary mb-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <i class="fa fa-question-circle" aria-hidden="true"></i>
+        </button>
+        {% if notfound %}
+        <div class="alert alert-danger error" role="alert">
+          {{notfound | safe}}
+        </div>
+        {% endif %}
+        <div class="d-flex justify-content-around">
+            <div>
+                <!-- Dark Mode -->
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="mode" class="form-check-input" id="toggle-mode" onclick="toggleMode()" {% if isdark %}checked{% endif %}>
+                    <label for="toggle-mode">Dark Mode</label>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Default form login -->
+    </div>
+  </div>
+  </body>
+
+
+  <!-- JS code -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <!-- Custom javascript -->
+  <script src="../static/mode.js"></script>
+
+</html>
