@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.79.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼</text></svg>">
     <title>LyricScrub</title>
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,7 +21,7 @@
 
   </head>
 
-  <body>
+  <body id="index">
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -53,7 +52,7 @@
 
         <!-- Artist -->
         <div class="container-fluid mb-4">
-        <input type="text" name="artist" class="form-control {% if badartist %}is-invalid{% endif %}" placeholder="Artist">
+        <input type="text" name="artist" class="form-control artist {% if badartist %}is-invalid{% endif %}" placeholder="Artist">
         {% if badartist %}
         <div class="invalid-feedback error">
           Please input valid artist name.
@@ -63,7 +62,7 @@
 
         <div class="container-fluid mb-4">
         <!-- Album -->
-        <input type="text" name="album" class="form-control {% if badalbum %}is-invalid{% endif %}" placeholder="Album">
+        <input type="text" name="album" class="form-control album {% if badalbum %}is-invalid{% endif %}" placeholder="Album">
         {% if badalbum %}
         <div class="invalid-feedback error">
           Please input valid album name.
@@ -72,18 +71,32 @@
         </div>
 
         <!-- Submit -->
-        <button id="submit" class="btn btn-primary mb-4" type="submit">
+        <button id="submit" class="btn btn-primary mb-4 submit" type="submit">
           <span id="sp1" class="spinner-border spinner-border-sm d-none"></span>
           Search
         </button>
         <button type="button" class="btn btn-secondary mb-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           <i class="fa fa-question-circle" aria-hidden="true"></i>
         </button>
-        {% if notfound %}
+        {% if notfound and not suggest %}
         <div class="alert alert-danger error" role="alert">
           {{notfound | safe}}
         </div>
         {% endif %}
+
+        {% if suggest %}
+        <div class="d-flex justify-content-center error">
+        <h6>Did you mean...</h6>
+        </div>
+        <div class="d-flex btn-group-vertical mb-4 error">
+        {% for i in range(0, len) %}
+        <button class="btn btn-outline-primary submit" onClick="autoFill('{{suggest[i][0] | safe}}', '{{suggest[i][1] | safe}}')">
+          {{suggest[i][0] | safe}} - {{suggest[i][1] | safe}}
+        </button>
+        {% endfor %}
+        </div>
+        {% endif %}
+
         <div class="d-flex justify-content-around">
             <div>
                 <!-- Dark Mode -->

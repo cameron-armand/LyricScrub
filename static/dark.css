@@ -1,9 +1,12 @@
 html, body
 {
-    height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background-color: #141d26;
     color:white;
+}
+
+#index {
+  height: 100vh;
 }
 
 .modal{

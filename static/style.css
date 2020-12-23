@@ -1,8 +1,12 @@
 html, body
 {
-    height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
+
+#index {
+  height: 100vh;
+}
+
 .container-fluid {
   margin-right: auto;
   margin-left: auto;

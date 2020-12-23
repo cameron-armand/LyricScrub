@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-  $("#submit").click(function () {
+  $(".submit").click(function () {
       setTimeout(function () { disableButton(); }, 0);
   });
 
@@ -23,4 +23,9 @@ function toggleMode() {
   } else {
     pagestyle.setAttribute('href','../static/style.css');
   }
+}
+
+function autoFill(artist,album) {
+   $('.artist').val(artist);
+   $('.album').val(album);
 }
