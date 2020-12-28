@@ -7,6 +7,7 @@ $(document).ready(function(){
 
   function disableButton() {
       $("#submit").prop('disabled', true);
+      $("#submitsong").prop('disabled', true);
       $(".form-control").prop('disabled', true);
       $("#sp1").attr("class","spinner-border spinner-border-sm");
       $(".error").addClass("d-none");
