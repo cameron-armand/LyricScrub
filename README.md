@@ -42,6 +42,6 @@ If the album is marked as explicit on Spotify, it will be noted in the final res
 
 * **Cameron Armand**
 
-## License
+## License/Disclaimer
 
 All of the code original to this project is free to be used, reused, and edited in any capacity. The project, in its current form, should be for personal use only. The LyricsGenius library uses web scrapping and should be used at your own risk.
