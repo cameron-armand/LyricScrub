@@ -7,6 +7,13 @@ html, body
   height: 100vh;
 }
 
+.bar {
+  width: 0;
+  height: 100%;
+  transition: height .3s;
+  background:#0275d8;
+}
+
 .container-fluid {
   margin-right: auto;
   margin-left: auto;
@@ -14,16 +21,24 @@ html, body
 }
 
 img{
-	height: 20px;
-	width: auto;
+    height: 20px;
+    width: auto;
 }
 
 .lyrics {
-	white-space: pre-wrap;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 20px;
-	color: black
+    white-space: pre-wrap;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
 }
+
+b
+{
+    font-weight: 800;
+    color: black;
+}
+
 .return {
   position: fixed; 
   top: 30px; 

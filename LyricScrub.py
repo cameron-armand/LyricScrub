@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, Response, stream_with_context
 import time
 import lyrics
 import json
@@ -10,6 +10,14 @@ with open("web_secrets.txt", 'r') as f:
 
 app.secret_key = secrets['secret_key']
 password = secrets['password']
+
+def stream_template(template_name, **context):
+    app.update_template_context(context)
+    t = app.jinja_env.get_template(template_name)
+    rv = t.stream(context)
+    rv.enable_buffering(5)
+    return rv
+
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -36,7 +44,7 @@ def index():
 		session['mode'] = request.form.get('mode')
 
 		### Validate response ####
-		if artist=='' or album_track=='':
+		if not artist or not album_track:
 			return render_template('index.html', badartist=not artist, badalbum=not album_track, isdark=session.get('mode'))
 
 		### Initialize results object ####
@@ -50,17 +58,12 @@ def index():
 			if not item.get_tracklist():
 				return render_template('index.html', isdark=session.get('mode'), notfound="Couldn't find that album &#x1F614", len=len(item.suggest), suggest=item.suggest)
 
-		### Get lyrics ####
-		if item.get_lyrics():
-			return render_template('results.html', isdark=session.get('mode'), len=len(item.results), results=item.results)
-		else:
-			return render_template('index.html', isdark=session.get('mode'), notfound="Couldn't find lyrics for that album &#x1F614")
+		rows = item.get_lyrics()
+		return Response(stream_with_context(stream_template('results.html', rows=rows, isdark=session.get('mode'), len=len(item.tracklist['items']))))
 
 	### Handle initial load ####
 	else:
 		return render_template('index.html', isdark=session.get('mode'))
-
-
 
 if __name__ == '__main__':
 	app.run()

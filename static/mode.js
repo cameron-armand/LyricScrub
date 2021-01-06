@@ -27,6 +27,6 @@ function toggleMode() {
 }
 
 function autoFill(artist,album) {
-   $('.artist').val(artist);
-   $('.album').val(album);
+   $(".artist").val(artist);
+   $(".album").val(album);
 }

@@ -119,11 +119,5 @@ class lyrics:
 				song_scrub = redata.sub(r'<b>\1</b>', song_scrub)
 
 			new_result.append(song_scrub)
-
-			self.results.append(new_result)
-
-		### Return true if some lyrics are found ####
-		if self.results:
-			return True
-		else:
-			return False                               
+			yield idx, new_result
+		return

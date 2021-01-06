@@ -9,7 +9,7 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- This website uses Open Sans! -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;800&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Custom styles for this site-->
@@ -18,28 +18,30 @@
     {% else %}
     <link id="pagestyle" href="../static/style.css" rel="stylesheet">
     {% endif %}
-
   </head>
 
   <body>
+    <script src="../static/nanobar.min.js"></script>
+    <!-- Custom javascript -->
+    <script>var nanobar = new Nanobar();</script>
     <div class="container content">
       <button href="/" class="btn btn-primary btn-lg active return" role="button" aria-pressed="true" onClick="window.location.href=window.location.href">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
       </button>
-      {% for i in range(0, len) %}
-      <h1>{{results[i][0] | safe}}</h1>
-      {% if results[i][1] %}
+      {% for idx,row in rows %}
+      <h1>{{row[0] | safe}}</h1>
+      {% if row[1] %}
       <div class="my-2">
       <img src=../static/explicit.png alt=explicit>
       </div>
       {% endif %}
-      <p class="lyrics mb-4">{{results[i][2] | safe}}</p>
+      <p class="lyrics mb-4">{{row[2] | safe}}</p>
+      <script>nanobar.go( {{(idx+1)/len*100}} )</script>
       {% endfor %}
     </div>
   </body>
   <!-- JS code -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  <!-- Custom javascript -->
-  <script src="../static/mode.js"></script>
+
 </html>

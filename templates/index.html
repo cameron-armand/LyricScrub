@@ -9,7 +9,8 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- This website uses Open Sans! -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,800&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Custom styles for this site-->
@@ -32,7 +33,7 @@
           </div>
           <div class="modal-body">
 	    LyricScrub is a web application used to pull lyrics for an album or track and highlight potentially offensive words and phrases. <br><br>
-	    <em>Please be patient</em> retrieving the lyrics can take some time.
+	    Please be patient retrieving the lyrics can take some time.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -97,7 +98,7 @@
           </div>
           <div class="d-flex btn-group-vertical mb-4 error">
             {% for i in range(0, len) %}
-            <button class="btn btn-outline-primary submit" name ="action" value="{% if tracksearch %}track{% endif %}" onClick="autoFill('{{suggest[i][0] | safe}}', '{{suggest[i][1] | safe}}')">
+            <button class="btn btn-outline-primary submit" name ="action" value="{% if tracksearch %}track{% endif %}" onClick="autoFill('{{suggest[i][0].replace("'","\\'") | safe}}', '{{suggest[i][1].replace("'","\\'") | safe}}')">
               {{suggest[i][0] | safe}} - {{suggest[i][1] | safe}}
             </button>
             {% endfor %}
@@ -125,5 +126,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   <!-- Custom javascript -->
   <script src="../static/mode.js"></script>
-
+  <script src="../static/nanobar.min.js"></script>
+  <!-- Custom javascript -->
+  <script>var nanobar = new Nanobar();</script>
+  
 </html>
