@@ -36,9 +36,10 @@
       </div>
       {% endif %}
       <p class="lyrics mb-4">{{row[2] | safe}}</p>
-      <script>nanobar.go( {{(idx+1)/len*100}} )</script>
+      <script>nanobar.go( {{(idx+1)/len*100-1}} )</script>
       {% endfor %}
     </div>
+    <script>nanobar.go(100)</script>
   </body>
   <!-- JS code -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
